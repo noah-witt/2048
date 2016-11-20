@@ -33,7 +33,9 @@ LocalStorageManager.prototype.localStorageSupported = function () {
   try {
     storage.setItem(testKey, "1");
     storage.removeItem(testKey);
-    return true;
+    //TODO DISABLED LOCAL storage
+    //return true;
+    return false;
   } catch (error) {
     return false;
   }
