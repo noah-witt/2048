@@ -72,8 +72,6 @@ auto.prototype.internalRun2 = function()
     }
   }
 
-  var upScore =0;
-  var leftScore=0;
   var downScore=0;
   var rightScore=0;
   gmGlobal.grid.eachCell(function(x,y,state){
@@ -83,50 +81,70 @@ auto.prototype.internalRun2 = function()
       //console.log(x+","+y+":"+val);
 
       //down
-      if(x<3&&gmGlobal.grid.cells[x+1][y]!=null&&val==gmGlobal.grid.cells[x+1][y].value)
+      if(y<3&&
+        gmGlobal.grid.cells[x][y+1]!=null&&
+        val==gmGlobal.grid.cells[x][y+1].value)
+      {
+        downScore=downScore+val;
+        //console.log("DOWN add score"+val+" iterating at("+x+","+y+")");
+      }
+      else if(y<2&&
+        gmGlobal.grid.cells[x][y+1]==null&&
+        gmGlobal.grid.cells[x][y+2]!=null&&
+        gmGlobal.grid.cells[x][y+2].value==val)
+      {
+        downScore=downScore+val;
+      }
+      else if(y<1&&
+        gmGlobal.grid.cells[x][y+1]==null&&
+        gmGlobal.grid.cells[x][y+2]==null&&
+        gmGlobal.grid.cells[x][y+3]!=null&&
+        gmGlobal.grid.cells[x][y+3].value==val)
       {
         downScore=downScore+val;
       }
 
-      //up
-      if(x>0&&gmGlobal.grid.cells[x-1][y]!=null&&val==gmGlobal.grid.cells[x-1][y].value)
-      {
-        upScore=upScore+val;
-      }
-
       //right
-      if(y<3&&gmGlobal.grid.cells[x][y+1]!=null&&val==gmGlobal.grid.cells[x][y+1].value)
+      if(x<3&&
+        gmGlobal.grid.cells[x+1][y]!=null&&
+        val==gmGlobal.grid.cells[x+1][y].value)
       {
         rightScore=rightScore+val;
+        //console.log("RIGHT add score"+val+" iterating at("+x+","+y+")");
       }
-
-      //left
-      if(y>0&&gmGlobal.grid.cells[x][y-1]!=null&&val==gmGlobal.grid.cells[x][y-1].value)
-      {
-        leftScore=leftScore+val;
-      }
+      else if(x<2&&
+        gmGlobal.grid.cells[x+1][y]==null&&
+        gmGlobal.grid.cells[x+2][y]!=null&&
+        gmGlobal.grid.cells[x+2][y].value==val)
+        {
+          rightScore=rightScore+val;
+        }
+        else if(x<1&&
+          gmGlobal.grid.cells[x+1][y]==null&&
+          gmGlobal.grid.cells[x+2][y]==null&&
+          gmGlobal.grid.cells[x+3][y]!=null&&
+          gmGlobal.grid.cells[x+3][y].value==val)
+        {
+          rightScore=rightScore+val;
+        }
     }
   });
 
-  //console.log("d:"+downScore+" u:"+upScore+" r:"+rightScore+" l:"+leftScore);
-  if(upScore>leftScore&&upScore>downScore&&upScore>rightScore)
+  //console.log("d:"+downScore+" r:"+rightScore);
+
+  if(downScore>rightScore)
   {
-    move(0);
+    gmGlobal.move(2);
+    //console.log("Move down");
   }
-  else if(leftScore>upScore&&leftScore>downScore&&leftScore>rightScore)
+  else if(rightScore>downScore)
   {
-    move(3);
-  }
-  else if(downScore>upScore&&downScore>leftScore&&downScore>rightScore)
-  {
-    move(2);
-  }
-  else if(rightScore>upScore&&rightScore>leftScore&&rightScore>downScore)
-  {
-    move(1);
+    gmGlobal.move(1);
+    //console.log("Move right");
   }
   else
   {
+    //console.log("move random");
     gmGlobal.move(Math.floor(Math.random()*4));
   }
 };
