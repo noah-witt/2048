@@ -9,7 +9,7 @@ auto.prototype.go= function()
 {
   //setInterval(this.internalRun,1);
   setInterval(this.internalRun2,1);
-}
+};
 
 auto.prototype.internalRun = function()
 {
@@ -50,7 +50,7 @@ auto.prototype.internalRun = function()
   }
   timesOfIt++;
   */
-}
+};
 
 //smarter ai
 auto.prototype.internalRun2 = function()
@@ -129,4 +129,4 @@ auto.prototype.internalRun2 = function()
   {
     gmGlobal.move(Math.floor(Math.random()*4));
   }
-}
+};
