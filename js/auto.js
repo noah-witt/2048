@@ -132,7 +132,7 @@ auto.prototype.internalRun2 = function()
 
   //console.log("d:"+downScore+" r:"+rightScore);
 
-  if(downScore>rightScore)
+  if(downScore>=rightScore&&downScore!==0)
   {
     gmGlobal.move(2);
     //console.log("Move down");
