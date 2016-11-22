@@ -4,11 +4,12 @@ function auto(gm)
 {
   this.init = 0;
   this.GameManagerHolder = gm;
+  this.testGrid = null;
 }
 auto.prototype.go= function()
 {
   //setInterval(this.internalRun,1);
-  setInterval(this.internalRun2,1);
+  setInterval(this.internalRun3,1);
 };
 
 auto.prototype.internalRun = function()
@@ -129,6 +130,50 @@ auto.prototype.internalRun2 = function()
         }
     }
   });
+
+  //console.log("d:"+downScore+" r:"+rightScore);
+
+  if(downScore>=rightScore&&downScore!==0)
+  {
+    gmGlobal.move(2);
+    //console.log("Move down");
+  }
+  else if(rightScore>downScore)
+  {
+    gmGlobal.move(1);
+    //console.log("Move right");
+  }
+  else
+  {
+    //console.log("move random");
+    gmGlobal.move(Math.floor(Math.random()*4));
+  }
+};
+
+//impoved ai V2;
+auto.prototype.internalRun3 = function()
+{
+  if(gmGlobal.isGameTerminated())
+  {
+    if(gmGlobal.won)
+    {
+      console.log("Continuing Game past 2048");
+      gmGlobal.keepPlaying();
+    }
+    else
+    {
+      if(gmGlobal.score>=2048)
+      {
+        console.log("restart "+gmGlobal.score);
+      }
+      gmGlobal.restart();
+    }
+  }
+  var s = new Score(gmGlobal.grid);
+  var r = s.result();
+  //console.log(r);
+  var downScore = r.downScore;
+  var rightScore = r.rightScore;
 
   //console.log("d:"+downScore+" r:"+rightScore);
 
