@@ -68,5 +68,5 @@ Score.prototype.result = function()
   return {
     "rightScore": rightScore,
     "downScore": downScore
-  }
+  };
 };
