@@ -9,7 +9,7 @@ function auto(gm)
 auto.prototype.go= function()
 {
   //setInterval(this.internalRun,1);
-  setInterval(this.internalRun3,1);
+  //setInterval(this.internalRun3,1);
 };
 
 auto.prototype.internalRun = function()
