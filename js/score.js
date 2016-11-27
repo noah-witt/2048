@@ -84,6 +84,8 @@ Score.prototype.result = function()
   };
 };
 
+
+//simulates after a move. needs to be given a grid sim object not a normal one
 Score.prototype.resultSim = function()
 {
   var that = this;
